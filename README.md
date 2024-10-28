@@ -61,3 +61,83 @@ python3 -m pip install git+https://github.com/LuqueDaniel/pybooru
 ```
 python3 gel_fetch.py --tags "holo" --txt holo/tags --img holo/imgs --danbooru
 ```
+
+## Parameters
+```
+
+def main():
+    import argparse
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--source', type=str, default=None, help="image source")
+    parser.add_argument('--tags_source', type=str, default=None, help="tag files. will use --source if not specified.")
+    parser.add_argument('--cond_images', type=str, default=None)
+    parser.add_argument("--init_image", default=None,)
+    parser.add_argument("--start_image", default=None,
+                        help="starting image, for super resolution unets")
+    parser.add_argument('--embeddings', type=str, default=None)
+    parser.add_argument('--tags', type=str, default=None)
+    parser.add_argument('--vocab', default=None)
+    parser.add_argument('--size', default=256, type=int)
+    parser.add_argument('--sample_steps', default=512, type=int)
+    parser.add_argument('--num_unets', default=1, type=int, help="additional unet networks")
+    parser.add_argument('--vocab_limit', default=None, type=int)
+    parser.add_argument('--epochs', default=200, type=int)
+    parser.add_argument('--imagen', default="imagen.pth")
+    parser.add_argument('--output', type=str, default=None)
+    parser.add_argument('--replace', action='store_true', help="replace the output file")
+    parser.add_argument('--unet_dims', default=330, type=int)
+    parser.add_argument('--unet2_dims', default=64, type=int)
+    parser.add_argument('--dim_mults', default="(1,2,3,4)", type=tuple_type)
+    parser.add_argument("--start_size", default=128, type=int)
+    parser.add_argument("--sample_unet", default=None, type=int)
+    parser.add_argument('--device', type=str, default="cuda")
+    parser.add_argument('--text_encoder', type=str, default="t5-large")
+    parser.add_argument("--cond_scale", default=1.0, type=float, help="sampling conditional scale 0-10.0")
+    parser.add_argument('--no_elu', action='store_true', help="don't use elucidated imagen")
+    parser.add_argument("--num_samples", default=1, type=int)
+    parser.add_argument("--skip_steps", default=None, type=int)
+    parser.add_argument("--sigma_max", default=80, type=float)
+    parser.add_argument("--full_load", action="store_true",
+                        help="don't use load_from_checkpoint.")
+    parser.add_argument('--no_memory_efficient', action='store_true',
+                        help="don't use memory_efficient unet1")
+    parser.add_argument('--print_params', action='store_true',
+                        help="print model params and exit")
+    parser.add_argument("--unet_size_mult", default=4, type=int)
+    parser.add_argument("--self_cond", action="store_true")
+
+    # training
+    parser.add_argument('--batch_size', default=8, type=int)
+    parser.add_argument('--micro_batch_size', default=8, type=int)
+    parser.add_argument('--samples_out', default="samples")
+    parser.add_argument('--train', action='store_true')
+    parser.add_argument('--train_encoder', action='store_true')
+    parser.add_argument('--shuffle_tags', action='store_true')
+    parser.add_argument('--train_unet', type=int, default=1)
+    parser.add_argument('--random_drop_tags', type=float, default=0.5)
+    parser.add_argument('--fp16', action='store_true')
+    parser.add_argument('--bf16', action='store_true')
+    parser.add_argument('--workers', type=int, default=8)
+    parser.add_argument('--no_text_transform', action='store_true')
+    parser.add_argument('--start_epoch', default=1, type=int)
+    parser.add_argument('--no_patching', action='store_true')
+    parser.add_argument('--create_embeddings', action='store_true')
+    parser.add_argument('--verify_images', action='store_true')
+    parser.add_argument('--pretrained', default="t5-small")
+    parser.add_argument('--no_sample', action='store_true',
+                        help="do not sample while training")
+    parser.add_argument("--lr", default=2e-4, type=float)
+    parser.add_argument('--loss', default="l2")
+    parser.add_argument('--sample_rate', default=10000, type=int)
+    parser.add_argument('--wandb', action='store_true',
+                        help="use wandb logging")
+    parser.add_argument('--is_t5', action='store_true',
+                        help="t5-like encoder")
+    parser.add_argument('--webdataset', action='store_true')
+    parser.add_argument('--null_unet1', action='store_true',
+                        help="use NullUnet() for unet1 (for superrez only model)")
+    parser.add_argument('--save_frequency', default=100, type=int, help="每幾個 epoch 儲存一次模型")
+
+    args = parser.parse_args()
+```
