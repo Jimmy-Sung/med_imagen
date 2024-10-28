@@ -1,10 +1,8 @@
-
-
-Setup:
-python3 -m pip install imagen-pytorch
-Running Inference:
-python3 imagen.py --imagen yourmodel.pth --tags "1girl, red_hair" --output red_hair.png
-Training:
+## Setup:
+* python3 -m pip install imagen-pytorch
+## Running Inference:
+* python3 imagen.py --imagen yourmodel.pth --tags "1girl, red_hair" --output red_hair.png
+## Training:
 Currently, this is set up to use danbooru-style tags such as:
 
 1girl, blue_dress, super_artist
@@ -18,7 +16,7 @@ dataset/
    imgs/img2.png
 The subdirectories doesn't really matter, only the filenames matter.
 
-To train:
+### To train:
 python3 imagen.py --train --source /path/to/dataset --imagen yourmodel.pth
 gel_fetch.py
 Included is a tool to fetch data from *booru-style websites and creates tag files in the expected format.
