@@ -141,3 +141,7 @@ def main():
 
     args = parser.parse_args()
 ```
+
+## 引用：
+* https://github.com/lucidrains/imagen-pytorch
+* https://github.com/deepglugs/deep_imagen/tree/main
